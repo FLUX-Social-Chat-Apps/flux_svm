@@ -8,12 +8,12 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/icon-192x192.png",
+      "src": "https://brown-glamorous-bear-418.mypinata.cloud/ipfs/bafkreiap34mugnbpbi2jcpru3np3u4mjslzvo22mdnqjagffezyps2su2y",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "https://brown-glamorous-bear-418.mypinata.cloud/ipfs/bafkreibisxrsck6whancifo6fisbjepkyxwvmciovutmyxgdzf6glblkqi",
       "sizes": "512x512",
       "type": "image/png"
     }
