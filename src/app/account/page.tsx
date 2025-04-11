@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { supabase } from "@/config/supabase";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,11 +35,13 @@ export default function Page() {
     fetchUser();
   }, []);
 
+  const router = useRouter();
+
   useEffect(() => {
     if (user && idUser?.includes(user)) {
-      redirect("/chats");
+      router.push("/chats");
     }
-  }, [user, idUser]);
+  }, [user, idUser, router]);
 
   const usersValue = {
     id: user,
@@ -62,10 +64,10 @@ export default function Page() {
       toast("Success Creating User", {
         description: String(data?.[0].message),
       });
-      redirect("/chats");
+      router.push("/chats");
     }
   };
-  console.log(idUser);
+
   return (
     <main className="space-y-5 max-w-sm mx-auto p-5">
       <ButtonBack />
