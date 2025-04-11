@@ -17,6 +17,7 @@ import { redirect } from "next/navigation";
 import { supabase } from "@/config/supabase";
 import { toast } from "sonner";
 import WalletConnect from "@/components/ui/WalletConnect";
+// import { randomBytes } from "crypto";
 
 type UserType = {
   id: string | null;
@@ -58,6 +59,11 @@ export default function Header() {
   async function createGroup() {
     setLoading(true);
     try {
+      // const groupIdToCrypto = randomBytes(10).toString("hex");
+      if (!groupName) {
+        toast.error("Please enter a group name.");
+        return;
+      }
       const { data: group, error: groupError } = await supabase
         .from("group_chat")
         .insert([{ name: groupName }])
@@ -75,9 +81,8 @@ export default function Header() {
 
       toast("Group created and user added successfully.");
     } catch (error) {
-      toast("Error creating group:", {
-        description: String(error),
-      });
+      toast.error("Error creating group:");
+      console.error("Error creating group:", error);
     } finally {
       setLoading(false);
     }
@@ -183,13 +188,14 @@ export default function Header() {
               <Input
                 type="text"
                 placeholder="Enter group ID"
+                className="w-1/3"
                 value={groupId}
                 onChange={(e) => setGroupId(e.target.value)}
               />
             </div>
             <div className="space-x-2 mt-4 flex justify-end">
               <Button variant="outline">Cancel</Button>
-              <Button onClick={joinGroup} disabled={loading || !groupId}>
+              <Button onClick={joinGroup} disabled={loading || !groupName}>
                 {loading ? "Loading" : "Join Group"}
               </Button>
             </div>

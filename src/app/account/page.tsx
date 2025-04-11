@@ -56,13 +56,11 @@ export default function Page() {
 
     if (error) {
       setLoading(false);
-      toast("Error Creating User", {
-        description: String(error),
-      });
+      toast("Error Creating User");
     } else {
       setLoading(false);
       toast("Success Creating User", {
-        description: String(data?.[0]),
+        description: String(data?.[0].message),
       });
       redirect("/chats");
     }
