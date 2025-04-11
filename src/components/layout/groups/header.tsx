@@ -81,9 +81,8 @@ export default function Header() {
 
       toast("Group created and user added successfully.");
     } catch (error) {
-      toast.error("Error creating group:", {
-        description: (error as any)?.message || "An error occurred",
-      });
+      toast.error("Error creating group:");
+      console.error("Error creating group:", error);
     } finally {
       setLoading(false);
     }

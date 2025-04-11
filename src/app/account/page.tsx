@@ -56,9 +56,7 @@ export default function Page() {
 
     if (error) {
       setLoading(false);
-      toast("Error Creating User", {
-        description: (error as any)?.message || "An error occurred",
-      });
+      toast("Error Creating User");
     } else {
       setLoading(false);
       toast("Success Creating User", {
