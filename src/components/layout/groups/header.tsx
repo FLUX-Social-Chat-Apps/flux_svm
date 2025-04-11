@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/config/supabase";
 import { toast } from "sonner";
 import WalletConnect from "@/components/ui/WalletConnect";
@@ -111,7 +111,7 @@ export default function Header() {
       setLoading(false);
     }
   }
-
+  const router = useRouter();
   useEffect(() => {
     if (isMember) {
       toast("You are already a member of this group.");
@@ -119,7 +119,7 @@ export default function Header() {
   }, [isMember]);
 
   if (!address) {
-    redirect("/account");
+    router.push("/account");
   }
 
   return (
@@ -162,7 +162,7 @@ export default function Header() {
             </div>
             <div className="space-x-2 mt-4 flex justify-end">
               <Button variant="outline">Cancel</Button>
-              <Button onClick={createGroup} disabled={loading}>
+              <Button onClick={createGroup} disabled={loading || !groupName}>
                 {loading ? "Loading" : "Create Group"}
               </Button>
             </div>
@@ -195,7 +195,7 @@ export default function Header() {
             </div>
             <div className="space-x-2 mt-4 flex justify-end">
               <Button variant="outline">Cancel</Button>
-              <Button onClick={joinGroup} disabled={loading || !groupName}>
+              <Button onClick={joinGroup} disabled={loading || !groupId}>
                 {loading ? "Loading" : "Join Group"}
               </Button>
             </div>
